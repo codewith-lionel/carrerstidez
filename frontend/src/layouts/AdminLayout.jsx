@@ -2,7 +2,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import {
   LayoutDashboard, Briefcase, GraduationCap, BookOpen, Award,
-  Users, LogOut, Settings, Shield,
+  Users, LogOut, ExternalLink, Shield,
 } from 'lucide-react';
 
 const adminNav = [
@@ -73,7 +73,7 @@ const AdminLayout = ({ children }) => {
         {/* Bottom */}
         <div className="p-4 border-t dark:border-gray-800 space-y-1">
           <Link to="/" className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 transition">
-            <Settings size={18} /> View Site
+            <ExternalLink size={18} /> View Site
           </Link>
           <button
             onClick={handleLogout}

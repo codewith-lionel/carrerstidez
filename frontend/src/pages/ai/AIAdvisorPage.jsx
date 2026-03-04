@@ -39,6 +39,7 @@ const AIAdvisorPage = () => {
       role: 'assistant',
       text: "Hi! I'm your AI Career Advisor powered by Gemini AI. I can help you with career guidance, job search strategies, study abroad options, scholarships, and more. What would you like to know? 🚀",
       timestamp: Date.now(),
+      isGreeting: true,
     },
   ]);
   const [input, setInput] = useState('');
@@ -60,9 +61,9 @@ const AIAdvisorPage = () => {
     setLoading(true);
 
     try {
-      // Build history (exclude the initial system greeting from history)
+      // Build history (exclude greeting messages from history)
       const history = messages
-        .filter((_, i) => i > 0)
+        .filter(m => !m.isGreeting)
         .map(m => ({ role: m.role, text: m.text }));
 
       const res = await aiAPI.getCareerAdvice({ message: userMsg, history });
@@ -89,6 +90,7 @@ const AIAdvisorPage = () => {
       role: 'assistant',
       text: "Hi! I'm your AI Career Advisor powered by Gemini AI. I can help you with career guidance, job search strategies, study abroad options, scholarships, and more. What would you like to know? 🚀",
       timestamp: Date.now(),
+      isGreeting: true,
     }]);
   };
 

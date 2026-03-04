@@ -1,42 +1,145 @@
+/* App Root - Indigo Theme */
+
 #root {
-  max-width: 1280px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* App-wide Component Styles */
+.app-container {
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 24px;
+}
+
+/* Hero Section Gradients */
+.hero-gradient {
+  background: radial-gradient(ellipse at top, #4f46e5 0%, #4338ca 50%, #312e81 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-gradient::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(129, 140, 248, 0.2) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Section Backgrounds */
+.section-white-indigo {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 50%, #eef2ff 100%);
+  position: relative;
+}
+
+.section-white-indigo::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #c7d2fe, transparent);
+}
+
+/* Feature Cards */
+.feature-card {
+  background: white;
+  border-radius: 20px;
+  padding: 32px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid #e0e7ff;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.05), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.feature-card:hover::before {
+  opacity: 1;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(79, 70, 229, 0.15);
+  border-color: #c7d2fe;
+}
+
+.dark .feature-card {
+  background: rgba(49, 46, 129, 0.3);
+  border-color: rgba(99, 102, 241, 0.2);
+}
+
+.dark .feature-card:hover {
+  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.25);
+}
+
+/* Stat Cards */
+.stat-card {
+  background: linear-gradient(135deg, #ffffff 0%, #eef2ff 100%);
+  border-radius: 16px;
+  padding: 24px;
   text-align: center;
+  border: 1px solid #e0e7ff;
+  transition: all 0.3s ease;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.stat-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(79, 70, 229, 0.12);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.dark .stat-card {
+  background: linear-gradient(135deg, rgba(49, 46, 129, 0.4) 0%, rgba(67, 56, 202, 0.2) 100%);
+  border-color: rgba(99, 102, 241, 0.2);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Loading Spinner - Indigo */
+.spinner-indigo {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e0e7ff;
+  border-top-color: #4f46e5;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
 }
 
-.card {
-  padding: 2em;
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
-.read-the-docs {
-  color: #888;
+/* Transition Effects */
+.transition-smooth {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Overlay Gradient */
+.overlay-indigo {
+  position: relative;
+}
+
+.overlay-indigo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 40%, rgba(79, 70, 229, 0.05) 100%);
+  pointer-events: none;
 }

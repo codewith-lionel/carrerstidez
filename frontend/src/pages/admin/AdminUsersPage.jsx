@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { adminAPI } from '../../services/api';
-import DashboardLayout from '../../layouts/DashboardLayout';
+import AdminLayout from '../../layouts/AdminLayout';
 import { Users, CheckCircle, XCircle, Search } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -33,7 +33,7 @@ const AdminUsersPage = () => {
   );
 
   return (
-    <DashboardLayout>
+    <AdminLayout>
       <div>
         <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6">Users Management</h2>
         <div className="flex gap-3 mb-4">
@@ -97,7 +97,7 @@ const AdminUsersPage = () => {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </AdminLayout>
   );
 };
 

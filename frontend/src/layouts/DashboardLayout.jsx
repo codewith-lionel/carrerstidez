@@ -2,7 +2,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import {
   LayoutDashboard, Briefcase, GraduationCap, BookOpen, Heart,
-  FileText, Settings, LogOut, ChevronRight, Award, Users,
+  FileText, Settings, LogOut, ChevronRight, Award, Sparkles,
 } from 'lucide-react';
 
 const DashboardLayout = ({ children }) => {
@@ -19,12 +19,21 @@ const DashboardLayout = ({ children }) => {
       isActive ? 'bg-blue-600 text-white' : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800'
     }`;
 
+  const studentNav = [
+    { to: '/dashboard', label: 'Overview', icon: LayoutDashboard },
+    { to: '/study-abroad', label: 'Study Abroad', icon: GraduationCap },
+    { to: '/programs', label: 'Programs', icon: BookOpen },
+    { to: '/scholarships', label: 'Scholarships', icon: Award },
+    { to: '/dashboard/saved-programs', label: 'Saved Programs', icon: Heart },
+    { to: '/ai-advisor', label: 'AI Advisor', icon: Sparkles },
+  ];
+
   const jobseekerNav = [
     { to: '/dashboard', label: 'Overview', icon: LayoutDashboard },
     { to: '/dashboard/applications', label: 'My Applications', icon: FileText },
     { to: '/dashboard/saved-jobs', label: 'Saved Jobs', icon: Heart },
-    { to: '/dashboard/saved-programs', label: 'Saved Programs', icon: BookOpen },
     { to: '/dashboard/resume', label: 'Resume Builder', icon: FileText },
+    { to: '/ai-advisor', label: 'AI Advisor', icon: Sparkles },
   ];
 
   const recruiterNav = [
@@ -33,18 +42,9 @@ const DashboardLayout = ({ children }) => {
     { to: '/dashboard/post-job', label: 'Post Job', icon: ChevronRight },
   ];
 
-  const adminNav = [
-    { to: '/dashboard', label: 'Overview', icon: LayoutDashboard },
-    { to: '/dashboard/users', label: 'Users', icon: Users },
-    { to: '/dashboard/all-jobs', label: 'All Jobs', icon: Briefcase },
-    { to: '/dashboard/universities', label: 'Universities', icon: GraduationCap },
-    { to: '/dashboard/programs', label: 'Programs', icon: BookOpen },
-    { to: '/dashboard/scholarships', label: 'Scholarships', icon: Award },
-  ];
-
   const getNavItems = () => {
     if (user?.role === 'recruiter') return recruiterNav;
-    if (user?.role === 'admin') return adminNav;
+    if (user?.role === 'student') return studentNav;
     return jobseekerNav;
   };
 

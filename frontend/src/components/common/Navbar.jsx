@@ -1,7 +1,7 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
-import { Sun, Moon, Menu, X, Briefcase, GraduationCap, User, LogOut, LayoutDashboard } from 'lucide-react';
+import { Sun, Moon, Menu, X, Briefcase, GraduationCap, User, LogOut, LayoutDashboard, Sparkles, Shield } from 'lucide-react';
 import { useState } from 'react';
 
 const Navbar = () => {
@@ -15,6 +15,8 @@ const Navbar = () => {
     await logout();
     navigate('/');
   };
+
+  const dashboardPath = user?.role === 'admin' ? '/admin' : '/dashboard';
 
   const navLinkClass = ({ isActive }) =>
     `font-medium transition-colors ${isActive ? 'text-blue-600' : 'text-gray-600 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-400'}`;
@@ -38,6 +40,11 @@ const Navbar = () => {
               <span className="flex items-center gap-1"><GraduationCap size={16} /> Study Abroad</span>
             </NavLink>
             <NavLink to="/scholarships" className={navLinkClass}>Scholarships</NavLink>
+            {isAuthenticated && (
+              <NavLink to="/ai-advisor" className={navLinkClass}>
+                <span className="flex items-center gap-1"><Sparkles size={16} /> AI Advisor</span>
+              </NavLink>
+            )}
           </div>
 
           {/* Actions */}
@@ -51,15 +58,24 @@ const Navbar = () => {
                   onClick={() => setDropdownOpen(!dropdownOpen)}
                   className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 rounded-full px-3 py-2 text-sm font-medium"
                 >
-                  <div className="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold">
+                  <div className={`w-7 h-7 rounded-full text-white flex items-center justify-center text-xs font-bold ${user?.role === 'admin' ? 'bg-indigo-600' : 'bg-blue-600'}`}>
                     {user?.name?.charAt(0)?.toUpperCase()}
                   </div>
                   <span className="dark:text-white">{user?.name?.split(' ')[0]}</span>
                 </button>
                 {dropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-xl shadow-lg border dark:border-gray-700 py-1 z-50">
-                    <Link to="/dashboard" className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-200" onClick={() => setDropdownOpen(false)}>
-                      <LayoutDashboard size={16} /> Dashboard
+                  <div className="absolute right-0 mt-2 w-52 bg-white dark:bg-gray-800 rounded-xl shadow-lg border dark:border-gray-700 py-1 z-50">
+                    {user?.role === 'admin' ? (
+                      <Link to="/admin" className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-200 text-indigo-600" onClick={() => setDropdownOpen(false)}>
+                        <Shield size={16} /> Admin Panel
+                      </Link>
+                    ) : (
+                      <Link to="/dashboard" className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-200" onClick={() => setDropdownOpen(false)}>
+                        <LayoutDashboard size={16} /> Dashboard
+                      </Link>
+                    )}
+                    <Link to="/ai-advisor" className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-200" onClick={() => setDropdownOpen(false)}>
+                      <Sparkles size={16} /> AI Advisor
                     </Link>
                     <Link to="/profile" className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-gray-200" onClick={() => setDropdownOpen(false)}>
                       <User size={16} /> Profile
@@ -93,7 +109,10 @@ const Navbar = () => {
             <NavLink to="/scholarships" className="block py-2 text-gray-600 dark:text-gray-300">Scholarships</NavLink>
             {isAuthenticated ? (
               <>
-                <NavLink to="/dashboard" className="block py-2 text-gray-600 dark:text-gray-300">Dashboard</NavLink>
+                <NavLink to="/ai-advisor" className="block py-2 text-gray-600 dark:text-gray-300">AI Advisor</NavLink>
+                <NavLink to={dashboardPath} className="block py-2 text-gray-600 dark:text-gray-300">
+                  {user?.role === 'admin' ? 'Admin Panel' : 'Dashboard'}
+                </NavLink>
                 <button onClick={handleLogout} className="block py-2 text-red-600">Logout</button>
               </>
             ) : (
@@ -110,3 +129,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

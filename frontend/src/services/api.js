@@ -119,4 +119,17 @@ export const adminAPI = {
   getDashboard: () => api.get("/admin/dashboard"),
   getUsers: (params) => api.get("/admin/users", { params }),
   toggleUserStatus: (id) => api.patch(`/admin/users/${id}/toggle-status`),
+  // Jobs
+  getAllJobs: (params) => api.get("/admin/jobs", { params }),
+  deleteJob: (id) => api.delete(`/admin/jobs/${id}`),
+  toggleJobStatus: (id) => api.patch(`/admin/jobs/${id}/toggle-status`),
+  // Content
+  getAllUniversities: (params) => api.get("/admin/universities", { params }),
+  getAllPrograms: (params) => api.get("/admin/programs", { params }),
+  getAllScholarships: (params) => api.get("/admin/scholarships", { params }),
+};
+
+// AI
+export const aiAPI = {
+  getCareerAdvice: (data) => api.post("/ai/career-advice", data),
 };

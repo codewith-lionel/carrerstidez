@@ -20,6 +20,7 @@ const programRoutes = require('./routes/programRoutes');
 const scholarshipRoutes = require('./routes/scholarshipRoutes');
 const savedRoutes = require('./routes/savedRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const aiRoutes = require('./routes/aiRoutes');
 
 const app = express();
 
@@ -90,6 +91,7 @@ app.use('/api/programs', programRoutes);
 app.use('/api/scholarships', scholarshipRoutes);
 app.use('/api/saved', savedRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/ai', aiRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

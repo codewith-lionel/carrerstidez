@@ -19,7 +19,15 @@ import MyJobsPage from './pages/dashboard/MyJobsPage';
 import PostJobPage from './pages/dashboard/PostJobPage';
 import SavedJobsPage from './pages/dashboard/SavedJobsPage';
 import ProfilePage from './pages/dashboard/ProfilePage';
+import AIAdvisorPage from './pages/ai/AIAdvisorPage';
+
+// Admin pages
+import AdminDashboardPage from './pages/admin/AdminDashboardPage';
 import AdminUsersPage from './pages/admin/AdminUsersPage';
+import AdminJobsPage from './pages/admin/AdminJobsPage';
+import AdminUniversitiesPage from './pages/admin/AdminUniversitiesPage';
+import AdminProgramsPage from './pages/admin/AdminProgramsPage';
+import AdminScholarshipsPage from './pages/admin/AdminScholarshipsPage';
 
 function App() {
   return (
@@ -37,8 +45,9 @@ function App() {
             <Route path="/study-abroad" element={<StudyAbroadPage />} />
             <Route path="/programs" element={<ProgramsPage />} />
             <Route path="/scholarships" element={<ScholarshipsPage />} />
+            <Route path="/ai-advisor" element={<ProtectedRoute><AIAdvisorPage /></ProtectedRoute>} />
 
-            {/* Protected routes */}
+            {/* User dashboard routes */}
             <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
             <Route path="/dashboard/applications" element={<ProtectedRoute><MyApplicationsPage /></ProtectedRoute>} />
             <Route path="/dashboard/my-jobs" element={<ProtectedRoute roles={['recruiter', 'admin']}><MyJobsPage /></ProtectedRoute>} />
@@ -46,8 +55,13 @@ function App() {
             <Route path="/dashboard/saved-jobs" element={<ProtectedRoute><SavedJobsPage /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
 
-            {/* Admin routes */}
-            <Route path="/dashboard/users" element={<ProtectedRoute roles={['admin']}><AdminUsersPage /></ProtectedRoute>} />
+            {/* Admin panel routes */}
+            <Route path="/admin" element={<ProtectedRoute roles={['admin']}><AdminDashboardPage /></ProtectedRoute>} />
+            <Route path="/admin/users" element={<ProtectedRoute roles={['admin']}><AdminUsersPage /></ProtectedRoute>} />
+            <Route path="/admin/jobs" element={<ProtectedRoute roles={['admin']}><AdminJobsPage /></ProtectedRoute>} />
+            <Route path="/admin/universities" element={<ProtectedRoute roles={['admin']}><AdminUniversitiesPage /></ProtectedRoute>} />
+            <Route path="/admin/programs" element={<ProtectedRoute roles={['admin']}><AdminProgramsPage /></ProtectedRoute>} />
+            <Route path="/admin/scholarships" element={<ProtectedRoute roles={['admin']}><AdminScholarshipsPage /></ProtectedRoute>} />
           </Routes>
         </Router>
       </AuthProvider>
